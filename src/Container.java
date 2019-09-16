@@ -89,7 +89,18 @@ public class Container {
             selectedItems++;
 
             // We delete the selected item from the array
-            removeItem(number);
+                if(auxIndex>0){
+                    i+=1;
+                    // We move the rest of them and delete de last one
+                    for(j=i;j<16;j++)
+                    {           
+                        aux[j-1]=aux[j];
+                        aux[j]=new MatchingItem();
+                        }
+                    //Finally we reduce the index and leave the loop
+                    auxIndex--;
+                }
+            
 
             //Now we look for its pair
             found=false; // We reset the condition
@@ -97,29 +108,37 @@ public class Container {
             {
                 number = (int)(Math.random()*auxIndex);
                 // If the element has any exclusion we ensure that we take other
-                if(pairs[pairIndex][0].getExclusion())
+                if(pairs[pairIndex][0].getExclusion() && pairs[pairIndex][0]!= aux[number])
                 {
                     // We look at the attributes to find other one
-                    if(aux[number]!=pairs[pairIndex][0].getException())
+                    if(aux[number]!=pairs[pairIndex][0].getException() && pairs[pairIndex][0].getException()!=aux[number])
                     {
                         // We automatically set the element
                         pairs[pairIndex][1]=aux[number];
                         pairIndex++;
-                        found=true;
-                        // We delete the selected item from the array
-                        removeItem(number);
+                        found=true; 
                     }
-
                 }
                 else
                     {
                         // We automatically set the element
                         pairs[pairIndex][1]=aux[number];
                         pairIndex++;
-                        found=true;
-                        // We delete the selected item from the array
-                        removeItem(number);
+                        found=true;                        
                     }
+                // We delete the selected item from the array
+                if(auxIndex>0){
+                    i+=1;
+                    // We move the rest of them and delete de last one
+                    for(j=i;j<16;j++)
+                    {           
+                        aux[j-1]=aux[j];
+                        aux[j]=new MatchingItem();
+                        }
+                    //Finally we reduce the index and leave the loop
+                    auxIndex--;
+                }
+                
             }
             // We modify our index
             selectedItems++;
@@ -161,6 +180,14 @@ public class Container {
         }
         list.removeAll();
         list.setModel(model);
+    }
+    
+    public void unSelectAll()
+    {
+        for(int i=0; i<16; i++)
+        {
+           items[i].unselect();
+        }
     }
     
     // Get/set methodes

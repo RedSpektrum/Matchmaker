@@ -100,6 +100,11 @@ public class AddItems extends javax.swing.JFrame {
 
         MatchBut.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         MatchBut.setText("Match items");
+        MatchBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MatchButActionPerformed(evt);
+            }
+        });
 
         CloseBut.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         CloseBut.setText("Close");
@@ -221,6 +226,12 @@ public class AddItems extends javax.swing.JFrame {
         container.removeItem(List.getSelectedIndex());
         container.refresh(List);    container.refresh(Box);
     }//GEN-LAST:event_RemoveButActionPerformed
+
+    private void MatchButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MatchButActionPerformed
+        Matchmaking window = new Matchmaking();
+        window.setContainer(container);
+        dispose();
+    }//GEN-LAST:event_MatchButActionPerformed
 
     /**
      * @param args the command line arguments

@@ -156,7 +156,9 @@ public class Init extends javax.swing.JFrame {
     }//GEN-LAST:event_CloseActionPerformed
 
     private void MatchButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MatchButActionPerformed
-        // TODO add your handling code here:
+        Matchmaking window = new Matchmaking();
+        window.setContainer(container);
+        dispose();
     }//GEN-LAST:event_MatchButActionPerformed
 
     private void DeleteButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButActionPerformed
