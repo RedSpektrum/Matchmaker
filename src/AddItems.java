@@ -52,6 +52,7 @@ public class AddItems extends javax.swing.JFrame {
         Menu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Add_your_items");
         setSize(new java.awt.Dimension(800, 600));
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
@@ -217,7 +218,6 @@ public class AddItems extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuActionPerformed
 
     private void RemoveButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveButActionPerformed
-        System.out.println(List.getSelectedIndex());
         container.removeItem(List.getSelectedIndex());
         container.refresh(List);    container.refresh(Box);
     }//GEN-LAST:event_RemoveButActionPerformed

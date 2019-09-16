@@ -160,10 +160,8 @@ public class Init extends javax.swing.JFrame {
     }//GEN-LAST:event_MatchButActionPerformed
 
     private void DeleteButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButActionPerformed
-        int index = List.getSelectedIndex();
-        List.removeAll();
-        container.removeItem(index);
-        container.refresh(List);
+        container.removeItem(List.getSelectedIndex());
+        container.refresh(List); 
     }//GEN-LAST:event_DeleteButActionPerformed
 
     /**
