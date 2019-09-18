@@ -168,9 +168,9 @@
                                   <Component id="TextField11" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="TextField10" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Component id="TextField12" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Component id="TextField12" min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -511,7 +511,6 @@
           <Font name="Arial" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Menu"/>
-        <Property name="actionCommand" type="java.lang.String" value="Menu"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuButActionPerformed"/>

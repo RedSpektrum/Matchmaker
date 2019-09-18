@@ -37,7 +37,6 @@ public class Container {
 
     public void addItem(MatchingItem item)
     {
-        System.out.println(index);
         items[index]=item;
         if(index<16)
         {
@@ -45,104 +44,110 @@ public class Container {
         }
     }
 
-    public void deleteItem(MatchingItem item)
-    {
-        // We look for the item
-        for(int i=0; i<index; i++)
-        {
-            if(items[i]==item)
-            {
-                removeItem(i);
-                break;
-            }
-        }
-    }
-
     public MatchingItem[][] matchItems()
     {
-        MatchingItem[] aux = items;
+        MatchingItem[] aux = items.clone();
         MatchingItem[][] pairs = new MatchingItem[8][2];
         MatchingItem selected = new MatchingItem();
 
+        int number;
         int selectedItems = 0;
         int auxIndex = index;
         int pairIndex = 0;
         int i,j; // Loop variables
-
+        boolean same, excluded; // Ensures that the pair arent the same nor exclusion
         boolean found = false; // Ensures that the pair of each one is been found
-
-        // We fill the matrix to avoid fails
+        
+        // ------------------------------------------------------------- //
+        // -------------------------- AUTOFILL ------------------------- //        
         for(i=0; i<8; i++)
         {
-            for(j=0;j<2;j++)
+            for(j=0; j<2; j++)
             {
-                pairs[i][j]=new MatchingItem();
+                pairs[i][j]= new MatchingItem();
             }
-        }
-
-        // Now we start selecting items until reaching the index
+        }        
+            
+        // ------------------------------------------------------------- //
+        // ------------------------- MAIN LOOP ------------------------- // 
         while(selectedItems<index)
         {
-            // We select one random item
-            int number = (int)(Math.random()*auxIndex);
-            pairs[pairIndex][0] = aux[number];
-            selectedItems++;
-
-            // We delete the selected item from the array
+                // ------------------------------------------------------------- //
+                // ---------------------- FIRST ELEMENT ------------------------ //
+                // We select for first the first element of the vector
                 if(auxIndex>0){
-                    i+=1;
-                    // We move the rest of them and delete de last one
-                    for(j=i;j<16;j++)
-                    {           
-                        aux[j-1]=aux[j];
-                        aux[j]=new MatchingItem();
-                        }
-                    //Finally we reduce the index and leave the loop
-                    auxIndex--;
-                }
+                pairs[pairIndex][0] = aux[0];
+                selectedItems++;            
+                // In case that there weren't any item there its changed by an empty one
+                aux[0] = new MatchingItem();
             
-
-            //Now we look for its pair
-            found=false; // We reset the condition
-            while(!found)
-            {
-                number = (int)(Math.random()*auxIndex);
-                // If the element has any exclusion we ensure that we take other
-                if(pairs[pairIndex][0].getExclusion() && pairs[pairIndex][0]!= aux[number])
+                // and then we delete it
+                for(i=1; i<auxIndex; i++)
                 {
-                    // We look at the attributes to find other one
-                    if(aux[number]!=pairs[pairIndex][0].getException() && pairs[pairIndex][0].getException()!=aux[number])
+                    aux[i-1]=aux[i]; // We shift the elements to replace them as a queue
+                }
+                auxIndex--;
+            
+                // If there is any element left we look for it
+                if(auxIndex>0)
+                {
+                    // ------------------------------------------------------------- //
+                    // ----------------------- NEXT ELEMENT ------------------------ //
+                    found=false;
+                    while(!found)
                     {
-                        // We automatically set the element
-                        pairs[pairIndex][1]=aux[number];
-                        pairIndex++;
-                        found=true; 
+                        number=99;
+                        while(number>auxIndex-1)
+                        {
+                        number = (int)(Math.random()*(auxIndex));
+                        }
+                        MatchingItem item = aux[number];
+                        same = (item == pairs[pairIndex][0]);
+                        // They arent the same we look for their exclusions
+                        if(!same)
+                        {
+                            // If they have exclusion we care about they not to be their respect one
+                            if(item.getExclusion() ||  pairs[pairIndex][0].getExclusion())
+                            {
+                                excluded = (item.getException()== pairs[pairIndex][0] ||  pairs[pairIndex][0].getException()==item );
+                                // If they aren't the excluded ones they are selected
+                                if(!excluded)
+                                {
+                                    pairs[pairIndex][1]=item;
+                                    found = true;
+                                }
+                            }
+                            // If they haven't any exclusion its automatically selected
+                            else
+                            {
+                                pairs[pairIndex][1]=item;
+                                found=true;
+                            }                        
+                            // If we found the item we reduce the queue elements
+                            if(found)
+                            {
+                                pairIndex++;
+                                selectedItems++;
+                                aux[number] = new MatchingItem();
+                                // Finally we delete the item
+                                for(i=1; i<auxIndex; i++)
+                                {
+                                    aux[i-1]=aux[i]; // We shift the elements to replace them as a queue
+                                }
+                                auxIndex--;                    
+                            }
+                        }
                     }
                 }
                 else
-                    {
-                        // We automatically set the element
-                        pairs[pairIndex][1]=aux[number];
-                        pairIndex++;
-                        found=true;                        
-                    }
-                // We delete the selected item from the array
-                if(auxIndex>0){
-                    i+=1;
-                    // We move the rest of them and delete de last one
-                    for(j=i;j<16;j++)
-                    {           
-                        aux[j-1]=aux[j];
-                        aux[j]=new MatchingItem();
-                        }
-                    //Finally we reduce the index and leave the loop
-                    auxIndex--;
+                {
+                    pairs[pairIndex][1]=new MatchingItem();
+                    selectedItems++;
+                    pairIndex++;
                 }
-                
             }
-            // We modify our index
-            selectedItems++;
         }
+       
 
         return pairs;
     }
@@ -169,6 +174,7 @@ public class Container {
         {
            box.addItem(items[i].getName());          
         }
+        box.setSelectedIndex(15);
     }
     
     public void refresh(JList list)

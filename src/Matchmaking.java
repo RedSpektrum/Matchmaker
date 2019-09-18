@@ -233,7 +233,6 @@ public class Matchmaking extends javax.swing.JFrame {
 
         MenuBut.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         MenuBut.setText("Menu");
-        MenuBut.setActionCommand("Menu");
         MenuBut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuButActionPerformed(evt);
@@ -395,7 +394,7 @@ public class Matchmaking extends javax.swing.JFrame {
                                     .addComponent(TextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(TextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(TextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(TextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -522,6 +521,11 @@ public class Matchmaking extends javax.swing.JFrame {
     }//GEN-LAST:event_AddButActionPerformed
 
     private void MatchButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MatchButActionPerformed
+        TextField1.removeAll(); TextField5.removeAll(); TextField9.removeAll(); TextField13.removeAll();
+        TextField2.removeAll(); TextField6.removeAll(); TextField10.removeAll(); TextField14.removeAll();
+        TextField3.removeAll(); TextField7.removeAll(); TextField11.removeAll(); TextField15.removeAll();
+        TextField4.removeAll(); TextField8.removeAll(); TextField12.removeAll(); TextField16.removeAll();
+        
         MatchingItem[][] pairs = container.matchItems();
         TextField1.setText(pairs[0][0].getName());  TextField2.setText(pairs[0][1].getName());
         TextField3.setText(pairs[1][0].getName());  TextField4.setText(pairs[1][1].getName());

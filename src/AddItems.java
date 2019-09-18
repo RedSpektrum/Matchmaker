@@ -214,6 +214,7 @@ public class AddItems extends javax.swing.JFrame {
         container.addItem(item);
         container.refresh(Box);
         container.refresh(List);
+        TextField.setText("");
     }//GEN-LAST:event_AddButActionPerformed
 
     private void MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuActionPerformed
