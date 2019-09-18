@@ -521,11 +521,6 @@ public class Matchmaking extends javax.swing.JFrame {
     }//GEN-LAST:event_AddButActionPerformed
 
     private void MatchButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MatchButActionPerformed
-        TextField1.removeAll(); TextField5.removeAll(); TextField9.removeAll(); TextField13.removeAll();
-        TextField2.removeAll(); TextField6.removeAll(); TextField10.removeAll(); TextField14.removeAll();
-        TextField3.removeAll(); TextField7.removeAll(); TextField11.removeAll(); TextField15.removeAll();
-        TextField4.removeAll(); TextField8.removeAll(); TextField12.removeAll(); TextField16.removeAll();
-        
         MatchingItem[][] pairs = container.matchItems();
         TextField1.setText(pairs[0][0].getName());  TextField2.setText(pairs[0][1].getName());
         TextField3.setText(pairs[1][0].getName());  TextField4.setText(pairs[1][1].getName());
